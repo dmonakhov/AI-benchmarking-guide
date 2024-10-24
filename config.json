@@ -63,12 +63,12 @@
             },
 
             "Meta-Llama-3-8B":{
-                "use_model": false,
+                "use_model": true,
                 "hf_url": "https://huggingface.co/meta-llama/Meta-Llama-3-8B",
                 "type": "llama",
                 "batch_sizes": [32,64],
                 "input_output_sizes": ["128,128"],
-                "tp_sizes": [1],
+                "tp_sizes": [1,8],
                 "warmup": 10,
                 "number_of_runs": 5,
                 "precision": "fp8"
