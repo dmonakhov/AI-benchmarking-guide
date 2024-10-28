@@ -207,7 +207,6 @@ class LLMBenchmark:
                                 --max_num_tokens 1048576 \
                                 --max_input_len  1048576 \
                                 --max_seq_len    1152 \
-                                --use_paged_context_fmha enable \
                                 --gemm_plugin auto
                             '''
                         else:
