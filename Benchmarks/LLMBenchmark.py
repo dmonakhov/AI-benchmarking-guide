@@ -220,7 +220,7 @@ class LLMBenchmark:
                             else:
                                 # Note we need to explicitly prepend "pipenv run" because virtualenv is not inherented by mpirun
                                 run_benchmark_command = f'''
-                                    mpirun -n {tp_size} --bind-to none -display-map --allow-run-as-root 
+                                    mpirun -n {tp_size} -display-map --allow-run-as-root \
                                                 pipenv run python3 /workspace/TensorRT-LLM/benchmarks/python/benchmark.py \
                                                 --batch_size {batch_size} \
                                                 --dtype {model_precision}
