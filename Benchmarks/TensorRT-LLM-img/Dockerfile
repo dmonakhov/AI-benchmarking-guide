@@ -12,7 +12,8 @@ RUN  apt-get update -y && \
             python${PYTHON_VER} \
 	    python3-pip \
 	    openmpi-bin libopenmpi-dev git \
-	    git-lfs && \
+	    git-lfs \
+	    numactl && \
 	    python3 -m pip install pipenv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* \

@@ -52,7 +52,8 @@ class LLMBenchmark:
             'entrypoint': '/bin/bash',
             'tty': True,
             'detach': True,
-            'auto_remove': True
+            'auto_remove': True,
+            'privileged': True # for sched_setaffinity(2) set_mempolicy(2) to work
         }
 
         #if existing container exists
@@ -219,9 +220,19 @@ class LLMBenchmark:
                                 '''
                             else:
                                 # Note we need to explicitly prepend "pipenv run" because virtualenv is not inherented by mpirun
+                                ####
+                                # FIMXME: Add cpu mapping to config, currently mapping is hardcoded for P5e
+                                # -x CPU_AFFINITY='24-35:36-47:0-11:12-23:72-83:84-95:48-59:60-71' \
+                                #  Use Explicit CPU pinning to minimize task migration
+                                #  NUMA node0 CPU(s):      0-23,96-119
+                                #  NUMA node1 CPU(s):      24-47,120-143
+                                #  NUMA node2 CPU(s):      48-71,144-167
+                                #  NUMA node3 CPU(s):      72-95,168-191
                                 run_benchmark_command = f'''
-                                    mpirun -n {tp_size} --bind-to none -display-map --allow-run-as-root 
-                                                pipenv run python3 /workspace/TensorRT-LLM/benchmarks/python/benchmark.py \
+                                    mpirun -n {tp_size} --bind-to none -display-map --allow-run-as-root \
+                                              -x MEM_AFFINITY='1:1:0:0:3:3:2:2' \
+                                              -x CPU_AFFINITY='24-25:36-37:0-1:12-13:72-73:84-85:48-49:60-61' \
+                                              {self.dir_path}/utils/mpibind.sh pipenv run python3 /workspace/TensorRT-LLM/benchmarks/python/benchmark.py \
                                                 --batch_size {batch_size} \
                                                 --dtype {model_precision}
                                                 --input_output_len {input_output_size} \
