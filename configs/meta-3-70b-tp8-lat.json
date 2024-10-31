@@ -54,11 +54,11 @@
                 "use_model": true,
                 "hf_url": "https://huggingface.co/meta-llama/Meta-Llama-3-70B",
                 "type": "llama",
-                "batch_sizes": [4,8,16,64,128,192, 255],
-                "input_output_sizes": ["1024,128"],
+                "batch_sizes": [4,8,16,24,32,64, 72, 80, 96],
+                "input_output_sizes": ["128,8"],
                 "tp_sizes": [8],
                 "warmup": 10,
-                "number_of_runs": 25,
+                "number_of_runs": 5,
                 "precision": "fp8"
             }
         }

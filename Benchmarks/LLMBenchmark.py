@@ -61,7 +61,7 @@ class LLMBenchmark:
         # Creates new Docker container
         self.container = client.containers.run('tensorrt-llm:12.4.0-devel-ubuntu22.04', **docker_run_options)
 
-        print(f"Docker Container ID: {self.container.id}")
+        print(f"Docker Container ID: {self.container.id}, IMG: {self.container.image.id}")
 
         # # Create required Folders
         if not os.path.exists(f'{self.dir_path}/models'):
