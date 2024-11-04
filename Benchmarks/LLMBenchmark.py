@@ -163,10 +163,9 @@ class LLMBenchmark:
                                 --checkpoint_dir {self.dir_path}/checkpoints/{model_name}/tp_{tp_size}/{self.precision}\
                                 --output_dir {self.dir_path}/engines/{model_name}/tp_{tp_size}/{self.precision} \
                                 --workers {tp_size} \
-                                --max_batch_size 1024 \
-                                --max_num_tokens 1048576 \
-                                --max_input_len  1048576 \
-                                --max_seq_len    1152 \
+                                --max_num_tokens 8192 \
+                                --max_input_len 133000 \
+                                --max_seq_len  133000\
                                 --gemm_plugin auto
                             '''
                         else:
