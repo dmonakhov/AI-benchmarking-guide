@@ -20,7 +20,7 @@ RUN  apt-get update -y && \
        /usr/share/man /usr/share/locale /usr/share/zoneinfo
 
 # Install TensorRT-LLM repo
-ARG TENSORT_RT_COMMIT=a681853d3803ee5893307e812530b5e7004bb6e1
+ARG TENSORT_RT_COMMIT=b0880169d0fb8cd0363049d91aa548e58a41be07 # tag=0.14.0
 RUN mkdir /workspace && \
      git clone https://github.com/NVIDIA/TensorRT-LLM.git /workspace/TensorRT-LLM  && \
      cd /workspace/TensorRT-LLM && \
